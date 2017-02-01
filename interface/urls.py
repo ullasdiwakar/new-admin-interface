@@ -22,6 +22,7 @@ urlpatterns = (
 
     url(r'^auth/', include('djangae.contrib.gauth.urls')),
     url(r'^$', include('dashboard.urls')),
+    url(r'^user_auth/', include('user_auth.urls')),
 )
 
 if settings.DEBUG:
