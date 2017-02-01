@@ -21,6 +21,7 @@ urlpatterns = (
     url(r'^csp/', include('cspreports.urls')),
 
     url(r'^auth/', include('djangae.contrib.gauth.urls')),
+    url(r'^$', include('dashboard.urls')),
 )
 
 if settings.DEBUG:
