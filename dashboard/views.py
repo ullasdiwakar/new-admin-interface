@@ -4,12 +4,19 @@ from django.contrib.auth.decorators import login_required
 from models import Installation
 import csv
 from google.appengine.ext import ndb
+from forms import CreateForm
 
 
 @login_required(login_url = "user_auth/login/")
 def home(request):
-    return HttpResponse("You are at home Mr. Monkey D. Luffy")
+    if request.method == 'POST':
+        form = CreateForm(request.POST)
+        if form.is_valid():
+            return HttpResponse("Ok cool")
+    form = CreateForm()
+    return render(request, 'home.html', {'form' : form})
 
+'''
 def create(request):
     mum2 = Installation(Id=2,	name='Mum2',	lat=18.9913045,	lng=72.8221139,	level1='Maharashta',	level2='MahWest',	level3='Mumbai',	status=False, id=2)
     mum3 = Installation(Id=3,	name='Mum3',	lat=19.0450229,	lng=72.8837403,	level1='Maharashta',	level2='MahWest',	level3='Mumbai',	status=True, id=3)
@@ -26,3 +33,4 @@ def create(request):
     entity_list = [mum2, mum3, pune1, pune2, pune3, ngp1, ngp2, ngp3, blr1, blr2, blr3]
     list_of_keys = ndb.put_multi(entity_list)
     return HttpResponse("The entities you wanted are Entities created")
+'''

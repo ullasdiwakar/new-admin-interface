@@ -11,3 +11,7 @@ class Installation(ndb.Model):
     level2 = ndb.StringProperty()
     level3 = ndb.StringProperty()
     status = ndb.BooleanProperty()
+
+class User(ndb.Model):
+    name = ndb.StringProperty()
+    phone = ndb.StringProperty()
