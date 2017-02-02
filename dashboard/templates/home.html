@@ -8,18 +8,18 @@
             </div>
         </div>
         <div class="panel panel-default">
-            <div class="panel-heading">Tasks</div>
+            <div class="panel-heading"><b>Towers</b></div>
             <div class="panel-body">
                 <div class="row" style="margin-left: 5px;">
-                    <div class="btn-group" role="group" aria-label="...">
+                    <div class="col-md-4">
                         <div class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <button type="button" class="btn btn-default">Task 1</button>
+                            <a href="create" class="dropdown-toggle" data-toggle="dropdown">
+                                <button type="button" class="btn btn-default">Create</button>
                             </a>
                             <ul class="dropdown-menu" role="menu">
                                 <div class="col-lg-12">
                                     <div class="text-center"><h3>Enter Details:</h3></div>
-                                    <form id="create-tower-entry" action="#" method="post" role="form">
+                                    <form id="create-tower-entry" action="create" method="post" role="form">
                                         {% csrf_token %}
                                         {% for field in form %}
                                             <div class="form-group">
@@ -31,8 +31,12 @@
                                     </form>
                                 </div>
                             </ul>
-                        </div>                            
+                        </div>                
+                    </div>    
+                    <div class="col-md-4">        
                         <a href="#"><button type="button" class="btn btn-default">Task 2</button></a>
+                    </div>
+                    <div class="col-md-4">
                         <a href="#"><button type="button" class="btn btn-default">Task 3</button></a>
                     </div>
                 </div>
