@@ -42,6 +42,7 @@ INSTALLED_APPS = (
     'djangae.contrib.gauth.datastore',
     'djangae.contrib.security',
     'interface',
+    'dashboard'
     # 'djangae.contrib.uniquetool',
 )
 
