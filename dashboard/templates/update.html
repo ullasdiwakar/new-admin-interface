@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Enter changes to be made:</h3>
+        </div>
+        <div class="panel-body">
+            <div class="container-fluid">
+            <table class="table">
+                <tr>
+                    <td>
+                        <div class="container-fluid">
+                        <table class="table table-striped">
+                            {% for key, item in details.items %}
+                                <tr>
+                                    <td>
+                                        <b>{{ key }}</b>
+                                    </td>
+                                    <td>
+                                        {{ item }}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container-fluid">
+                        <table class="table">
+                            <form id="update-tower-entry" action="update" method="post" role="form">
+                                {% csrf_token %}
+                                {% for field in update_form %}
+                                    <tr>
+                                        <td>
+                                            <center>
+                                            <div class="form-group">
+                                                {{ field.label_tag }}
+                                                {{ field }}
+                                            </div>
+                                            </center>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                <tr>
+                                    <td>
+                                        <center><input class="btn btn-success" type="submit" value="Update"></center>
+                                    </td>
+                                </tr>
+                            </form>
+                        </table>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+

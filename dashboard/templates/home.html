@@ -11,34 +11,74 @@
             <div class="panel-heading"><b>Towers</b></div>
             <div class="panel-body">
                 <div class="row" style="margin-left: 5px;">
-                    <div class="col-md-4">
+                    <div class="col-md-4"> <!-- Create -->
                         <div class="dropdown">
                             <a href="create" class="dropdown-toggle" data-toggle="dropdown">
-                                <button type="button" class="btn btn-default">Create</button>
+                                <button type="button" class="btn btn-default"><b>Create</b></button>
                             </a>
                             <ul class="dropdown-menu" role="menu">
                                 <div class="col-lg-12">
                                     <div class="text-center"><h3>Enter Details:</h3></div>
                                     <form id="create-tower-entry" action="create" method="post" role="form">
                                         {% csrf_token %}
-                                        {% for field in form %}
+                                        {% for field in create_form %}
                                             <div class="form-group">
                                                 {{ field.label_tag }}
                                                 {{ field }}
                                             </div>
                                         {% endfor %}
-                                        <input class="btn btn-success" type="submit" value="Create">
+                                        <center><input class="btn btn-success" type="submit" value="Create"></center>
                                     </form>
                                 </div>
                             </ul>
                         </div>                
-                    </div>    
-                    <div class="col-md-4">        
-                        <a href="#"><button type="button" class="btn btn-default">Task 2</button></a>
-                    </div>
-                    <div class="col-md-4">
-                        <a href="#"><button type="button" class="btn btn-default">Task 3</button></a>
-                    </div>
+                    </div> <!-- End Create -->
+
+                    <div class="col-md-4"> <!-- Edit -->       
+                        <div class="dropdown">
+                            <a href="edit_screen" class="dropdown-toggle" data-toggle="dropdown">
+                                <button type="button" class="btn btn-default"><b>Edit</b></button>
+                            </a>
+                            <ul class="dropdown-menu" role="menu">
+                                <div class="col-lg-12">
+                                    <div class="text-center"><h4>Enter ID of Existing Entity:</h4></div>
+                                    <form id="edit-tower-entry" action="edit_screen" method="post" role="form">
+                                        {% csrf_token %}
+                                        {% for field in delete_form %}
+                                            <div class="form-group">
+                                                {{ field.label_tag }}
+                                                {{ field }}
+                                            </div>
+                                        {% endfor %}
+                                        <center><input class="btn btn-success" type="submit" value="Find"></center>
+                                    </form>
+                                </div>
+                            </ul>
+                        </div>
+                    </div> <!-- End Edit -->
+
+                    <div class="col-md-4"> <!-- Delete -->
+                        <div class="dropdown">
+                            <a href="delete" class="dropdown-toggle" data-toggle="dropdown">
+                                <button type="button" class="btn btn-default"><b>Delete</b></button>
+                            </a>
+                            <ul class="dropdown-menu" role="menu">
+                                <div class="col-lg-12">
+                                    <div class="text-center"><h3>Enter ID:</h3></div>
+                                    <form id="delete-tower-entry" action="delete" method="post" role="form">
+                                        {% csrf_token %}
+                                        {% for field in delete_form %}
+                                            <div class="form-group">
+                                                {{ field.label_tag }}
+                                                {{ field }}
+                                            </div>
+                                        {% endfor %}
+                                        <center><input class="btn btn-success" type="submit" value="Delete"></center>
+                                    </form>
+                                </div>
+                            </ul>
+                        </div>
+                    </div> <!-- End Delete -->
                 </div>
             </div>
             </div>
