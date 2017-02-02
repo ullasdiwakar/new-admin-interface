@@ -89,21 +89,17 @@ def update(request):
             if tower is None:
                 msg = "Please enter the correct ID."
                 return render(request, 'error.html', {'message' : msg})
-            if form.cleaned_data['name'] is not None:
+            if form.cleaned_data['name'] != '':
                 tower.name = form.cleaned_data['name']
-            if form.cleaned_data['lat'] is None:
-                pass
-            else:
+            if form.cleaned_data['lat'] != '':
                 tower.lat = float(form.cleaned_data['lat'])
-            if form.cleaned_data['lng'] is None:
-                pass
-            else:
+            if form.cleaned_data['lng'] != '':
                 tower.lng = float(form.cleaned_data['lng'])
-            if form.cleaned_data['level1'] is not None:
+            if form.cleaned_data['level1'] != '':
                 tower.level1 = form.cleaned_data['level1']
-            if form.cleaned_data['level2'] is not None:
+            if form.cleaned_data['level2'] != '':
                 tower.level2 = form.cleaned_data['level2']
-            if form.cleaned_data['level3'] is not None:
+            if form.cleaned_data['level3'] != '':
                 tower.level3 = form.cleaned_data['level3']
             if form.cleaned_data['status'] is not None:
                 tower.status = form.cleaned_data['status']
