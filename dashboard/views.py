@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from models import Installation
 import csv
@@ -19,6 +19,14 @@ def create(request):
         form = CreateForm(request.POST)
         if form.is_valid():
             Id = form.cleaned_data['Id']
+            tower_key = ndb.Key(Installation, int(Id))
+            tower = tower_key.get()
+            if tower is None:
+                pass
+            else:
+                data = form.cleaned_data
+                create_form = CreateForm(initial=data)
+                return render(request, 'confirm.html', {'data' : data, 'create_form' : create_form})
             name = form.cleaned_data['name']
             lat = float(form.cleaned_data['lat'])
             lng = float(form.cleaned_data['lng'])
@@ -105,6 +113,27 @@ def update(request):
                 tower.status = form.cleaned_data['status']
             new_key = tower.put()
             msg = "Entity Updated Successfully"
+            return render(request, 'success.html', {'message' : msg})
+    msg = "Oops, Looks like the data you entered was improper!!"
+    return render(request, 'error.html', {'message' : msg})
+
+def overwrite(request):
+    if request.method == 'POST':
+        form = CreateForm(request.POST)
+        if 'cancel' in request.POST:
+            return HttpResponseRedirect('/home')
+        if form.is_valid():
+            Id = form.cleaned_data['Id']
+            name = form.cleaned_data['name']
+            lat = float(form.cleaned_data['lat'])
+            lng = float(form.cleaned_data['lng'])
+            level1 = form.cleaned_data['level1']
+            level2 = form.cleaned_data['level2']
+            level3 = form.cleaned_data['level3']
+            status = form.cleaned_data['status']
+            new_tower = Installation(Id=int(Id), name=name, lat=lat, lng=lng, level1=level1, level2=level2, level3=level3, status=status, id=int(Id))
+            tower_key = new_tower.put()
+            msg = "Entity Overwritten Successfully"
             return render(request, 'success.html', {'message' : msg})
     msg = "Oops, Looks like the data you entered was improper!!"
     return render(request, 'error.html', {'message' : msg})

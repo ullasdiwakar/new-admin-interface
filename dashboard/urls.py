@@ -8,4 +8,5 @@ urlpatterns = [
     url(r'^delete', views.delete, name='delete'),
     url(r'^edit_screen', views.edit_screen, name='edit_screen'),
     url(r'^update', views.update, name='update'),
+    url(r'^overwrite', views.overwrite, name='overwrite'),
 ]

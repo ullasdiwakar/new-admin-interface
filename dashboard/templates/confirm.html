@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+        <div class="panel panel-warning">
+            <div class="panel-heading">
+                <h3 class="panel-title">Entity Already Exists</h3>
+                <p>Sure you want to Overwrite?</p>
+            </div>
+            <div class="panel-body">
+                <div class="container-fluid">
+                    <table class="table table-striped">
+                        <form id="confirm_update_entity" action="overwrite" role="form" method="post">
+                            {% csrf_token %}
+                            {% for field in create_form %}
+                                <tr>
+                                    <td>
+                                        <center>
+                                            <div class="form-group">
+                                                {{ field.label_tag }}
+                                                {{ field }}
+                                            </div>
+                                        </center>
+                                    </td>
+                                </tr>                        
+                            {% endfor %}
+                            <tr>
+                                <td>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <center><input class="btn btn-warning" name="overwrite" type="submit" value="Overwrite"></center>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <center><input class="btn btn-danger" name="cancel" type="submit" value="Cancel"></center>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr> 
+                        </form>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
