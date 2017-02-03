@@ -3,15 +3,25 @@
 {% block content %}
     <div class="container">
         <div class="row">
-            <div class="jumbotron">
-                <h2>Welcome to your dashboard, admin</h2>
-            </div>
+            {% if user.is_authenticated %}
+                <div class="jumbotron">
+                    <h2>Welcome to your dashboard, {{ user.email }}</h2>
+                </div>
+            {% else %}
+                <div class="jumbotron">
+                    <h2>Please Login.</h2>
+                    <p>You have to be logged in to use this page.</p>
+                    <p><a class="btn btn-primary btn-lg" href="user_auth/login" role="button">Login</a></p>
+                </div>
+            {% endif %}
         </div>
+        {% if user.is_authenticated %}
         <div class="panel panel-default">
             <div class="panel-heading"><h2><b>Towers</b></h2></div>
             <div class="panel-body">
                 <div class="row" style="margin-left: 5px;">
-                    <div class="col-md-4"> <!-- Create -->
+                    <center> <!-- Create -->
+                    <div class="col-md-4">
                         <div class="dropdown">
                             <a href="create" class="dropdown-toggle" data-toggle="dropdown">
                                 <button type="button" class="btn btn-default"><b>Create</b></button>
@@ -32,9 +42,11 @@
                                 </div>
                             </ul>
                         </div>                
-                    </div> <!-- End Create -->
+                    </div>
+                    </center> <!-- End Create -->
 
-                    <div class="col-md-4"> <!-- Edit -->       
+                    <center> <!-- Edit -->
+                    <div class="col-md-4">       
                         <div class="dropdown">
                             <a href="edit_screen" class="dropdown-toggle" data-toggle="dropdown">
                                 <button type="button" class="btn btn-default"><b>Edit</b></button>
@@ -55,9 +67,11 @@
                                 </div>
                             </ul>
                         </div>
-                    </div> <!-- End Edit -->
+                    </div> 
+                    </center> <!-- End Edit -->
 
-                    <div class="col-md-4"> <!-- Delete -->
+                    <center> <!-- Delete -->
+                    <div class="col-md-4">
                         <div class="dropdown">
                             <a href="delete" class="dropdown-toggle" data-toggle="dropdown">
                                 <button type="button" class="btn btn-default"><b>Delete</b></button>
@@ -78,7 +92,8 @@
                                 </div>
                             </ul>
                         </div>
-                    </div> <!-- End Delete -->
+                    </div>
+                    </center> <!-- End Delete -->
                 </div>
             </div>
             </div>
@@ -91,28 +106,28 @@
                     <table class="table table-striped">
                         <tr>
                                 <th>
-                                    <center><h4>ID</h4></center>
+                                    <center><h4><b>ID</b></h4></center>
                                 </th>
                                 <th>
-                                    <center><h4>Name</h4></center>
+                                    <center><h4><b>Name</b></h4></center>
                                 </th>
                                 <th>
-                                    <center><h4>Latitude</h4></center>
+                                    <center><h4><b>Latitude</b></h4></center>
                                 </th>
                                 <th>
-                                    <center><h4>Longitude</h4></center>
+                                    <center><h4><b>Longitude</b></h4></center>
                                 </th>
                                 <th>
-                                    <center><h4>Level 1</h4></center>
+                                    <center><h4><b>Level 1</b></h4></center>
                                 </th>
                                 <th>
-                                    <center><h4>Level 2</h4></center>
+                                    <center><h4><b>Level 2</b></h4></center>
                                 </th>
                                 <th>
-                                    <center><h4>Level 3</h4></center>
+                                    <center><h4><b>Level 3</b></h4></center>
                                 </th>
                                 <th>
-                                    <center><h4>Status</h4></center>
+                                    <center><h4><b>Status</b></h4></center>
                                 </th>
                             </tr>
                         {% for tower in towers %}
@@ -139,7 +154,7 @@
                                     <center>{{ tower.level3 }}</center>
                                 </td>
                                 <td>
-                                    <center>{{ tower.status }}</center>
+                                    <center>{% if tower.status %}<p>Active</p>{% else %}<p>Inactive</p>{% endif %}</center>
                                 </td>
                             </tr>
                         {% endfor %}
@@ -167,6 +182,7 @@
                     </center>
                 </div>
             </div>
+            {% endif %}
         </div>
     </div>
 {% endblock content %}

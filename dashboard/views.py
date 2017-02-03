@@ -8,7 +8,7 @@ from forms import CreateForm, DeleteForm, EditForm, UpdateForm
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
-@login_required(login_url = "user_auth/login/")
+#@login_required(login_url = "user_auth/login/")
 def home(request):
     create_form = CreateForm()
     edit_form = EditForm()
