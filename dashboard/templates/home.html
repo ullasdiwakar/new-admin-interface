@@ -85,10 +85,36 @@
 
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">List of Towers:</h3>
+                    <h3 class="panel-title"><h3><b>List of Towers:</b></h3>
                 </div>
                 <div class="panel-body">
                     <table class="table table-striped">
+                        <tr>
+                                <th>
+                                    <center><h4>ID</h4></center>
+                                </th>
+                                <th>
+                                    <center><h4>Name</h4></center>
+                                </th>
+                                <th>
+                                    <center><h4>Latitude</h4></center>
+                                </th>
+                                <th>
+                                    <center><h4>Longitude</h4></center>
+                                </th>
+                                <th>
+                                    <center><h4>Level 1</h4></center>
+                                </th>
+                                <th>
+                                    <center><h4>Level 2</h4></center>
+                                </th>
+                                <th>
+                                    <center><h4>Level 3</h4></center>
+                                </th>
+                                <th>
+                                    <center><h4>Status</h4></center>
+                                </th>
+                            </tr>
                         {% for tower in towers %}
                             <tr>
                                 <td>
@@ -117,22 +143,28 @@
                                 </td>
                             </tr>
                         {% endfor %}
-
-                    <div class="pagination">
-                        <span class="step-links">
-                            {% if towers.has_previous %}
-                                <a href="?page={{ towers.previous_page_number }}">previous</a>
-                            {% endif %}
-
-                            <span class="current">
-                                Page {{ towers.number }} of {{ towers.paginator.num_pages }}.
-                            </span>
-
-                            {% if towers.has_next %}
-                                <a href="?page={{ towers.next_page_number }}">next</a>
-                            {% endif %}
-                        </span>
-                    </div>
+                    
+                    <center>
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination">
+                                <li>
+                                    {% if towers.has_previous %}
+                                        <a href="?page={{ towers.previous_page_number }}" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
+                                    {% endif %}
+                                </li>
+                                <li>
+                                    <span class="current">
+                                        Page {{ towers.number }} of {{ towers.paginator.num_pages }}.
+                                    </span>
+                                </li>
+                                <li>
+                                    {% if towers.has_next %}
+                                        <a href="?page={{ towers.next_page_number }}"  aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
+                                    {% endif %}
+                                </li>
+                            </ul>
+                        </nav>
+                    </center>
                 </div>
             </div>
         </div>
