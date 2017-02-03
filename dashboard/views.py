@@ -5,6 +5,7 @@ from models import Installation
 import csv
 from google.appengine.ext import ndb
 from forms import CreateForm, DeleteForm, EditForm, UpdateForm
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
 @login_required(login_url = "user_auth/login/")
@@ -78,11 +79,11 @@ def edit_screen(request):
             entity_properties['name'] = tower.name
             entity_properties['lat'] = tower.lat
             entity_properties['lng'] = tower.lng
-            entity_properties['Level-1'] = tower.level1
-            entity_properties['Level-2'] = tower.level2
-            entity_properties['Level-3'] = tower.level3
+            entity_properties['level1'] = tower.level1
+            entity_properties['level2'] = tower.level2
+            entity_properties['level3'] = tower.level3
             entity_properties['status'] = tower.status
-            update_form = UpdateForm()
+            update_form = UpdateForm(initial=entity_properties)
             return render(request, 'update.html', {'details' : entity_properties, 'update_form' : update_form})
     msg = "Oops, Looks like the data you entered was improper!!"
     return render(request, 'error.html', {'message' : msg}) 

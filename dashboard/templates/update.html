@@ -3,7 +3,8 @@
 {% block content %}
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h3 class="panel-title">Enter changes to be made:</h3>
+            <center><h2 class="panel-title"><b>Alter Fields to be Updated:</b></h2></center>
+            <center><p>Do not touch other fields.</p></center>
         </div>
         <div class="panel-body">
             <div class="container-fluid">
@@ -12,22 +13,6 @@
                     <td>
                         <div class="container-fluid">
                         <table class="table table-striped">
-                            {% for key, item in details.items %}
-                                <tr>
-                                    <td>
-                                        <b>{{ key }}</b>
-                                    </td>
-                                    <td>
-                                        {{ item }}
-                                    </td>
-                                </tr>
-                            {% endfor %}
-                        </table>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="container-fluid">
-                        <table class="table">
                             <form id="update-tower-entry" action="update" method="post" role="form">
                                 {% csrf_token %}
                                 {% for field in update_form %}
