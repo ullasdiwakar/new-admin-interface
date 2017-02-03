@@ -13,7 +13,19 @@ def home(request):
     create_form = CreateForm()
     edit_form = EditForm()
     delete_form = DeleteForm()
-    return render(request, 'home.html', {'create_form' : create_form, 'edit_form' : edit_form, 'delete_form' : delete_form})
+    query = "SELECT * FROM Installation"
+    towers_list = ndb.gql(query).fetch()
+    paginator = Paginator(towers_list, 10)
+    page = request.GET.get('page')
+    try:
+        towers = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        towers = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        towers = paginator.page(paginator.num_pages)
+    return render(request, 'home.html', {'create_form' : create_form, 'edit_form' : edit_form, 'delete_form' : delete_form, 'towers' : towers})
 
 def create(request):
     if request.method == 'POST':

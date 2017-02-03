@@ -83,6 +83,58 @@
             </div>
             </div>
 
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">List of Towers:</h3>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-striped">
+                        {% for tower in towers %}
+                            <tr>
+                                <td>
+                                    <center>{{ tower.Id }}</center>
+                                </td>
+                                <td>
+                                    <center>{{ tower.name }}</center>
+                                </td>
+                                <td>
+                                    <center>{{ tower.lat }}</center>
+                                </td>
+                                <td>
+                                    <center>{{ tower.lng }}</center>
+                                </td>
+                                <td>
+                                    <center>{{ tower.level1 }}</center>
+                                </td>
+                                <td>
+                                    <center>{{ tower.level2 }}</center>
+                                </td>
+                                <td>
+                                    <center>{{ tower.level3 }}</center>
+                                </td>
+                                <td>
+                                    <center>{{ tower.status }}</center>
+                                </td>
+                            </tr>
+                        {% endfor %}
+
+                    <div class="pagination">
+                        <span class="step-links">
+                            {% if towers.has_previous %}
+                                <a href="?page={{ towers.previous_page_number }}">previous</a>
+                            {% endif %}
+
+                            <span class="current">
+                                Page {{ towers.number }} of {{ towers.paginator.num_pages }}.
+                            </span>
+
+                            {% if towers.has_next %}
+                                <a href="?page={{ towers.next_page_number }}">next</a>
+                            {% endif %}
+                        </span>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 {% endblock content %}
