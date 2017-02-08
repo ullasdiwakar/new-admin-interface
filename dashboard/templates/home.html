@@ -31,12 +31,16 @@
                                     <div class="text-center"><h3>Enter Details:</h3></div>
                                     <form id="create-tower-entry" action="create" method="post" role="form">
                                         {% csrf_token %}
+                                        <table class="table table-striped">
                                         {% for field in create_form %}
                                             <div class="form-group">
-                                                {{ field.label_tag }}
-                                                {{ field }}
+                                                <tr>
+                                                    <td>{{ field.label_tag }}</td>
+                                                    <td>{{ field }}</td>
+                                                </tr>
                                             </div>
                                         {% endfor %}
+                                        </table>
                                         <center><input class="btn btn-success" type="submit" value="Create"></center>
                                     </form>
                                 </div>
@@ -56,12 +60,16 @@
                                     <div class="text-center"><h4>Enter ID of Existing Entity:</h4></div>
                                     <form id="edit-tower-entry" action="edit_screen" method="post" role="form">
                                         {% csrf_token %}
+                                        <table class="table table-striped">
                                         {% for field in delete_form %}
                                             <div class="form-group">
-                                                {{ field.label_tag }}
-                                                {{ field }}
+                                                <tr>
+                                                    <td>{{ field.label_tag }}</td>
+                                                    <td>{{ field }}</td>
+                                                </tr>
                                             </div>
                                         {% endfor %}
+                                        </table>
                                         <center><input class="btn btn-success" type="submit" value="Find"></center>
                                     </form>
                                 </div>
@@ -81,12 +89,16 @@
                                     <div class="text-center"><h3>Enter ID:</h3></div>
                                     <form id="delete-tower-entry" action="delete" method="post" role="form">
                                         {% csrf_token %}
+                                        <table class="table table-striped">
                                         {% for field in delete_form %}
                                             <div class="form-group">
-                                                {{ field.label_tag }}
-                                                {{ field }}
+                                                <tr>
+                                                    <td>{{ field.label_tag }}</td>
+                                                    <td>{{ field }}</td>
+                                                </tr>
                                             </div>
                                         {% endfor %}
+                                        </table>
                                         <center><input class="btn btn-success" type="submit" value="Delete"></center>
                                     </form>
                                 </div>

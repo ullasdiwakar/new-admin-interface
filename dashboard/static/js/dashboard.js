@@ -11,10 +11,10 @@ $(document).ready(function(){
                 dataType : 'json',
                 success : function(data){
                     alert(data.message);
+                    location.reload(true);
                 }
             });
         }
-        console.log(searchIDs);
     });
     $("#all-checked").click(function () {
         $('input:checkbox').not(this).prop('checked', this.checked);
