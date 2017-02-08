@@ -185,3 +185,21 @@ def createentity(request):
     entity_list = [mum1, mum2, mum3, pune1, pune2, pune3, ngp1, ngp2, ngp3, blr1, blr2, blr3]
     list_of_keys = ndb.put_multi(entity_list)
     return HttpResponse("The entities you wanted are Entities created")
+
+def mini_update(request, ID):
+    tower_key = ndb.Key(Installation, int(ID))
+    tower = tower_key.get()
+    if tower is None:
+        msg = "Oops, Looks like there is an error!!"
+        return render(request, 'error.html', {'message' : msg})
+    entity_properties = dict()
+    entity_properties['Id'] = tower.Id
+    entity_properties['name'] = tower.name
+    entity_properties['lat'] = tower.lat
+    entity_properties['lng'] = tower.lng
+    entity_properties['level1'] = tower.level1
+    entity_properties['level2'] = tower.level2
+    entity_properties['level3'] = tower.level3
+    entity_properties['status'] = tower.status
+    update_form = UpdateForm(initial=entity_properties)
+    return render(request, 'update.html', {'details' : entity_properties, 'update_form' : update_form})

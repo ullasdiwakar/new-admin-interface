@@ -13,7 +13,7 @@
                     <td>
                         <div class="container-fluid">
                         <table class="table table-striped">
-                            <form id="update-tower-entry" action="update" method="post" role="form">
+                            <form id="update-tower-entry" action="/update" method="post" role="form">
                                 {% csrf_token %}
                                 {% for field in update_form %}
                                     <tr>

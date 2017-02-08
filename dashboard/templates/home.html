@@ -149,6 +149,9 @@
                             <th>
                                 <center><h4><b>Status</b></h4></center>
                             </th>
+                            <th>
+                                <center><h4>EDIT</h4></center>
+                            </th>
                         </tr>    
                             
                         {% for tower in towers %}
@@ -180,6 +183,14 @@
                                 <td>
                                     <center>{% if tower.status %}<p>Active</p>{% else %}<p>Inactive</p>{% endif %}</center>
                                 </td>
+                                <td>
+                                    <center>
+                                        <a href="{% url 'mini_update' tower.Id %}">
+                                        <button type="button" class="btn btn-warning" id="edit-button">
+                                            Edit
+                                        </button>
+                                        </a>
+                                    </center>
                             </tr>
                         {% endfor %}
                     
