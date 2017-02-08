@@ -13,8 +13,9 @@ handlers:
   script: interface.wsgi.application
   secure: always
 
+#static_dir: dashboard/static/ when deploying
 - url: /static
-  static_dir: dashboard/static/
+  static_dir: static/
   secure: always
 
 # Set Django admin to be login:admin as well as Django's is_staff restriction

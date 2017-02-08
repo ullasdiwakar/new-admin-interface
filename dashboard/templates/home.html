@@ -5,7 +5,7 @@
         <div class="row">
             {% if user.is_authenticated %}
                 <div class="jumbotron">
-                    <h2>Welcome to your dashboard, {{ user.email }}</h2>
+                    <h2>Welcome to your dashboard</h2>
                 </div>
             {% else %}
                 <div class="jumbotron">
@@ -105,33 +105,45 @@
                 <div class="panel-body">
                     <table class="table table-striped">
                         <tr>
-                                <th>
-                                    <center><h4><b>ID</b></h4></center>
-                                </th>
-                                <th>
-                                    <center><h4><b>Name</b></h4></center>
-                                </th>
-                                <th>
-                                    <center><h4><b>Latitude</b></h4></center>
-                                </th>
-                                <th>
-                                    <center><h4><b>Longitude</b></h4></center>
-                                </th>
-                                <th>
-                                    <center><h4><b>Level 1</b></h4></center>
-                                </th>
-                                <th>
-                                    <center><h4><b>Level 2</b></h4></center>
-                                </th>
-                                <th>
-                                    <center><h4><b>Level 3</b></h4></center>
-                                </th>
-                                <th>
-                                    <center><h4><b>Status</b></h4></center>
-                                </th>
-                            </tr>
+                            <th>
+                                <center>
+                                    <input type="checkbox" id="all-checked" name="check-all">
+                                    <button type="button" id="delete-button" class="btn btn-xs btn-danger">
+                                        Delete
+                                    </button>
+                                </center>
+                            </th>
+                            <th>
+                                <center><h4><b>ID</b></h4></center>
+                            </th>
+                            <th>
+                                <center><h4><b>Name</b></h4></center>
+                            </th>
+                            <th>
+                                <center><h4><b>Latitude</b></h4></center>
+                            </th>
+                            <th>
+                                <center><h4><b>Longitude</b></h4></center>
+                            </th>
+                            <th>
+                                <center><h4><b>Level 1</b></h4></center>
+                            </th>
+                            <th>
+                                <center><h4><b>Level 2</b></h4></center>
+                            </th>
+                            <th>
+                                <center><h4><b>Level 3</b></h4></center>
+                            </th>
+                            <th>
+                                <center><h4><b>Status</b></h4></center>
+                            </th>
+                        </tr>    
+                            
                         {% for tower in towers %}
                             <tr>
+                                <td>
+                                    <center><input type="checkbox" id="delete-items" name="delete_ID" value="{{ tower.Id }}"></center>
+                                </td>
                                 <td>
                                     <center>{{ tower.Id }}</center>
                                 </td>

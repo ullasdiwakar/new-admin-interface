@@ -1,8 +1,10 @@
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.contrib.auth.decorators import login_required
 from models import Installation
 import csv
+import json
+from django.views.decorators.csrf import csrf_exempt
 from google.appengine.ext import ndb
 from forms import CreateForm, DeleteForm, EditForm, UpdateForm
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -150,3 +152,16 @@ def overwrite(request):
             return render(request, 'success.html', {'message' : msg})
     msg = "Oops, Looks like the data you entered was improper!!"
     return render(request, 'error.html', {'message' : msg})
+
+@csrf_exempt
+def delete_entities(request):
+    items = request.POST.getlist('IDs[]')
+    for i in items:
+        tower_key = ndb.Key(Installation, int(i))
+        tower = tower_key.get()
+        tower.key.delete()
+        if tower is None:
+            data = {'message': 'Sorry, does not exist'}
+            return JsonResponse(data)
+    data = {'message': 'Fucked it'}
+    return JsonResponse(data)
