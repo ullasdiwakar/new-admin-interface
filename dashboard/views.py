@@ -156,12 +156,14 @@ def overwrite(request):
 @csrf_exempt
 def delete_entities(request):
     items = request.POST.getlist('IDs[]')
+    id_str = ''
     for i in items:
+        id_str = id_str + i + ', '
         tower_key = ndb.Key(Installation, int(i))
         tower = tower_key.get()
         tower.key.delete()
         if tower is None:
             data = {'message': 'Sorry, does not exist'}
             return JsonResponse(data)
-    data = {'message': 'Fucked it'}
+    data = {'message': 'Deleted Entities with IDs %s'%id_str}
     return JsonResponse(data)
