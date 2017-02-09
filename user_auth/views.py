@@ -9,20 +9,8 @@ from django.views.decorators.csrf import csrf_exempt
 
 @csrf_exempt
 def login(request):
-    if request.method == 'POST':
-        form = LoginForm(request.POST)
-        if form.is_valid():
-            email = form.cleaned_data['email']
-            admin_key = ndb.Key('Admins', email)
-            admin = admin_key.get()
-            if admin is None:
-                msg = "Looks like you are not one of the admins."
-                return render(request, 'login_error.html', {'message' : msg})
-            else:
-                url = users.create_login_url(dest_url=request.GET.get('next'))
-                return HttpResponseRedirect(url)
-    form = LoginForm()
-    return render(request, 'login.html', {'form' : form})
+    url = users.create_login_url('user_auth/validate')
+    return HttpResponseRedirect(url)
 
 def logout(request):
     """Redirects to the homepage after logging the user out."""
@@ -36,20 +24,13 @@ def create_admin(request):
     list_of_keys = ndb.put_multi(entity_list)
     return HttpResponse("The Admins you wanted are created")
 
-
-"""
-if request.method == 'POST':
-        form = LoginForm(request.POST)
-        if form.is_valid():
-            email = form.cleaned_data['email']
-            admin_key = ndb.key('Admins', email)
-            admin = admin_key.get()
-            if admin is None:
-                msg = "Looks like you are not one of the admins."
-                return render(request, 'login_error.html', {'message' : msg})
-            else:
-                url = users.create_login_url(dest_url=request.GET.get('next'))
-                return HttpResponseRedirect(url)
-    form = LoginForm()
-    return render(request, 'login.html', {'form' : form})
-"""
+def validate(request):
+    user = users.GetCurrentUser()
+    email = user.email()
+    admin_key = ndb.Key('Admins', email)
+    admin = admin_key.get()
+    if admin is None:
+        msg = "Sorry, You are not an admin"
+        return render(request, 'login_error.html', {'message' : msg})
+    else:
+        return HttpResponseRedirect('/home')
