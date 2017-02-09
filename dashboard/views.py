@@ -100,7 +100,7 @@ def edit_screen(request):
             update_form = UpdateForm(initial=entity_properties)
             return render(request, 'update.html', {'details' : entity_properties, 'update_form' : update_form})
     msg = "Oops, Looks like the data you entered was improper!!"
-    return render(request, 'error.html', {'message' : msg}) 
+    return render(request, 'error.html', {'message' : msg})
 
 def update(request):
     if request.method == 'POST':
@@ -125,12 +125,18 @@ def update(request):
             if form.cleaned_data['level3'] != '':
                 tower.level3 = form.cleaned_data['level3']
             if form.cleaned_data['status'] is not None:
-                tower.status = form.cleaned_data['status']
+                tower.status = str_to_bool(form.cleaned_data['status'])
             new_key = tower.put()
             msg = "Entity Updated Successfully"
             return render(request, 'success.html', {'message' : msg})
     msg = "Oops, Looks like the data you entered was improper!!"
     return render(request, 'error.html', {'message' : msg})
+
+def str_to_bool(value):
+    if value == 'True':
+        return True
+    else:
+        return False
 
 def overwrite(request):
     if request.method == 'POST':

@@ -1,4 +1,5 @@
 from django import forms
+from choices import *
 
 class CreateForm(forms.Form):
     Id = forms.CharField(max_length=10, label="ID")
@@ -8,7 +9,7 @@ class CreateForm(forms.Form):
     level1 = forms.CharField(max_length=50, label="Level 1")
     level2 = forms.CharField(max_length=50, label="Level 2")
     level3 = forms.CharField(max_length=50, label="Level 3")
-    status = forms.BooleanField(initial=True, required=False)
+    status = forms.ChoiceField(choices = STATUS_CHOICES, label="Status", initial='', widget=forms.Select(), required=True)
 
 class DeleteForm(forms.Form):
     Id = forms.CharField(max_length=10, label="ID")
@@ -24,4 +25,4 @@ class UpdateForm(forms.Form):
     level1 = forms.CharField(max_length=50, label="Level 1", required=False)
     level2 = forms.CharField(max_length=50, label="Level 2", required=False)
     level3 = forms.CharField(max_length=50, label="Level 3", required=False)
-    status = forms.BooleanField(initial=True, required=False)
+    status = forms.ChoiceField(choices = STATUS_CHOICES, label="Status", initial='', widget=forms.Select(), required=True)
