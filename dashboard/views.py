@@ -48,7 +48,7 @@ def create(request):
             level1 = form.cleaned_data['level1']
             level2 = form.cleaned_data['level2']
             level3 = form.cleaned_data['level3']
-            status = form.cleaned_data['status']
+            status = str_to_bool(form.cleaned_data['status'])
             new_tower = Installation(Id=int(Id), name=name, lat=lat, lng=lng, level1=level1, level2=level2, level3=level3, status=status, id=int(Id))
             tower_key = new_tower.put()
             msg = "Entity Created Successfully"
